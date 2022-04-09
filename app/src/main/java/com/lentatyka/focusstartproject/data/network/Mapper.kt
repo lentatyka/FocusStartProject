@@ -1,8 +1,8 @@
-package com.lentatyka.focusstartproject.data
+package com.lentatyka.focusstartproject.data.network
 
 import com.lentatyka.focusstartproject.data.network.model.ExchangeRatesDto
-import com.lentatyka.focusstartproject.domain.model.ExchangeRates
-import com.lentatyka.focusstartproject.domain.model.Rate
+import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
+import com.lentatyka.focusstartproject.domain.network.model.Rate
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

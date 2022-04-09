@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lentatyka.focusstartproject.databinding.RateItemBinding
-import com.lentatyka.focusstartproject.domain.model.Rate
+import com.lentatyka.focusstartproject.domain.network.model.Rate
 
 class MainAdapter(private val callback: (Rate) -> Unit) : ListAdapter<Rate, MainAdapter.ViewHolder>(DiffCallback) {
 

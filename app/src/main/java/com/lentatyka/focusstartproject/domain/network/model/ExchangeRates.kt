@@ -1,4 +1,4 @@
-package com.lentatyka.focusstartproject.domain.model
+package com.lentatyka.focusstartproject.domain.network.model
 
 data class ExchangeRates(
     val date: String,

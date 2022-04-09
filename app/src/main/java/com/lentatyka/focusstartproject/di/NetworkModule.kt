@@ -3,11 +3,11 @@ package com.lentatyka.focusstartproject.di
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
 import com.lentatyka.focusstartproject.common.Constants
-import com.lentatyka.focusstartproject.data.RateRepositoryImpl
+import com.lentatyka.focusstartproject.data.network.RateRepositoryImpl
 import com.lentatyka.focusstartproject.data.network.ExchangeRatesApi
 import com.lentatyka.focusstartproject.data.network.model.ExchangeRateDeserializer
 import com.lentatyka.focusstartproject.data.network.model.ExchangeRatesDto
-import com.lentatyka.focusstartproject.domain.RateRepository
+import com.lentatyka.focusstartproject.domain.network.RateRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,7 +25,7 @@ abstract class NetworkModule {
     ): JsonDeserializer<@JvmSuppressWildcards ExchangeRatesDto>
 
     @Binds
-    abstract fun bindRateRepository(repository: RateRepositoryImpl):RateRepository
+    abstract fun bindRateRepository(repository: RateRepositoryImpl): RateRepository
 
     companion object{
         @Provides

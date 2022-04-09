@@ -1,14 +1,15 @@
 package com.lentatyka.focusstartproject.presentation
 
-import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lentatyka.focusstartproject.common.State
-import com.lentatyka.focusstartproject.domain.GetExchangeRatesUseCase
-import com.lentatyka.focusstartproject.domain.model.ExchangeRates
-import com.lentatyka.focusstartproject.domain.model.Rate
+import com.lentatyka.focusstartproject.domain.network.ExchangeRatesUseCase
+import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
+import com.lentatyka.focusstartproject.domain.network.model.Rate
+import com.lentatyka.focusstartproject.domain.preferences.GetAutoUpdateUseCase
+import com.lentatyka.focusstartproject.domain.preferences.SetAutoUpdateUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -16,13 +17,14 @@ import javax.inject.Singleton
 
 @Singleton
 class MainViewModel @Inject constructor(
-    private val getExchangeRatesUseCase: GetExchangeRatesUseCase
+    private val getExchangeRatesUseCase: ExchangeRatesUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<State<ExchangeRates>>()
     val state: LiveData<State<ExchangeRates>> get() = _state
 
     private val _rate = MutableLiveData<Rate?>()
     val rate: LiveData<Rate?> get() = _rate
+
 
     init {
         updateExchangeRates()

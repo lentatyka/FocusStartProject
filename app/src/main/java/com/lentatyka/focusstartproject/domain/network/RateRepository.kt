@@ -1,4 +1,4 @@
-package com.lentatyka.focusstartproject.domain
+package com.lentatyka.focusstartproject.domain.network
 
 import com.lentatyka.focusstartproject.data.network.model.ExchangeRatesDto
 

@@ -18,7 +18,7 @@
             type="String" />
         <variable
             name="converter"
-            type="com.lentatyka.focusstartproject.domain.model.Rate" />
+            type="com.lentatyka.focusstartproject.domain.network.model.Rate" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
