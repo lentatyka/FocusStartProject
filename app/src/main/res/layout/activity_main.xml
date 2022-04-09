@@ -128,44 +128,41 @@
             app:layout_constraintTop_toBottomOf="@+id/swipeLayout"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <TextView
-                android:id="@+id/tv_char_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                app:mainValue="@{converter.charCode}"
-                app:defaultValue="@{@string/default_rate_char_code}"
-                tools:text="AUD" />
-
             <EditText
                 android:id="@+id/et_value"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/tv_char_code"
+                android:layout_alignParentStart="true"
                 android:autofillHints="1"
                 android:inputType="numberDecimal"
                 android:maxLength="10"
                 android:maxLines="1" />
-
             <TextView
-                android:id="@+id/tv_nominal"
+                android:id="@+id/tv_default_char_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/et_value"
-                app:mainValue="@{@string/nominal(converter.nominal)}"
-                app:defaultValue="@{@string/nominal(1)}"
-                tools:text="x 100" />
+                android:layout_marginStart="8dp"
+                android:text="@string/default_rate_char_code"
+                tools:text="RUB" />
 
             <TextView
                 android:id="@+id/tv_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                app:mainValue="@{result}"
-                app:defaultValue="@{@string/default_result}"
+                android:layout_toStartOf="@id/tv_char_code"
+                android:layout_marginEnd="8dp"
+                android:text="@{result}"
                 tools:text="100500" />
+
+            <TextView
+                android:id="@+id/tv_char_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:mainValue="@{converter.charCode}"
+                app:defaultValue="@{@string/default_rate_char_code}"
+                tools:text="AUD" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

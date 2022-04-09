@@ -37,15 +37,16 @@ class MainActivity : AppCompatActivity() {
     private fun setViews() {
 
         binding.etValue.setOnKeyListener { _, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN &&
-                keyCode == KeyEvent.KEYCODE_ENTER
+            if (keyEvent.action == KeyEvent.ACTION_UP
             ) {
-                //TODO
+                binding.result = viewModel.evaluateValue(
+                    binding.etValue.text.toString()
+                )
                 true
             } else
                 false
         }
-        //verify checkbox preferences (on/off)
+        //verify checkbox preferences (on/off). Add chkboxLiveDate
     }
 
     private fun setViewModel() {
@@ -73,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                     mainAdapter.submitList(state.data.rate)
                 }
             }
+        }
+        viewModel.rate.observe(this){
+            binding.converter = it
         }
     }
 

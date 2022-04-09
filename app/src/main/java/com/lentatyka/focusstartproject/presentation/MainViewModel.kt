@@ -1,5 +1,6 @@
 package com.lentatyka.focusstartproject.presentation
 
+import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,13 +39,16 @@ class MainViewModel @Inject constructor(
     }
 
     fun evaluateValue(value: String):String{
-        return try {
-            _rate.value?.let {
-                val d = (value.toDouble() * it.nominal) / it.value
+        return if (value.isEmpty())
+            "0"
+        else
+            return try {
+                val d =_rate.value?.let {
+                    (value.toDouble() * it.nominal) / it.value
+                } ?: value.toDouble()
                 String.format("%.4f", d)
-            } ?: value
-        }catch (e: NumberFormatException){
-            value
-        }
+            }catch (e: NumberFormatException){
+                value
+            }
     }
 }
