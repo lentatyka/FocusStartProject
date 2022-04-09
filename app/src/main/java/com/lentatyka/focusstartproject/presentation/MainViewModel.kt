@@ -17,7 +17,9 @@ import javax.inject.Singleton
 
 @Singleton
 class MainViewModel @Inject constructor(
-    private val getExchangeRatesUseCase: ExchangeRatesUseCase
+    private val getExchangeRatesUseCase: ExchangeRatesUseCase,
+    private val getAutoUpdateUseCase: GetAutoUpdateUseCase,
+    private val setAutoUpdateUseCase: SetAutoUpdateUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<State<ExchangeRates>>()
     val state: LiveData<State<ExchangeRates>> get() = _state
@@ -25,9 +27,13 @@ class MainViewModel @Inject constructor(
     private val _rate = MutableLiveData<Rate?>()
     val rate: LiveData<Rate?> get() = _rate
 
+    private val _autoUpdate = MutableLiveData<Boolean>()
+    val autoUpdate: LiveData<Boolean> get() = _autoUpdate
+
 
     init {
         updateExchangeRates()
+        _autoUpdate.value = getAutoUpdateUseCase()
     }
 
     fun updateExchangeRates() {
@@ -52,5 +58,16 @@ class MainViewModel @Inject constructor(
             }catch (e: NumberFormatException){
                 value
             }
+    }
+
+    override fun onCleared() {
+        _autoUpdate.value?.let {
+            setAutoUpdateUseCase(it)
+        }
+        super.onCleared()
+    }
+
+    fun setAutoUpdate(checked: Boolean) {
+        _autoUpdate.value = checked
     }
 }

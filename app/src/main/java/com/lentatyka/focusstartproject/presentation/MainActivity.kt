@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lentatyka.focusstartproject.FocusStartApplication
 import com.lentatyka.focusstartproject.R
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.databinding.ActivityMainBinding
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainAdapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerAppComponent.create().inject(this)
+        (application as FocusStartApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
                 true
             } else
                 false
+        }
+        binding.chbAutoUpdate.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setAutoUpdate(isChecked)
         }
         //verify checkbox preferences (on/off). Add chkboxLiveDate
     }
