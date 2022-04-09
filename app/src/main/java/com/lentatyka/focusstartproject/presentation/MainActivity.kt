@@ -60,7 +60,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_LONG).show()
                 }
                 is State.Success -> {
-                    binding.swipeLayout.isRefreshing = false
+                    with(binding){
+                        swipeLayout.isRefreshing = false
+                        //pass date to main layout
+                        state.data.also {
+                            date = it.date
+                            previousDate = it.previousDate
+                            timestamp = it.timestamp
+                        }
+                    }
+
                     mainAdapter.submitList(state.data.rate)
                 }
             }

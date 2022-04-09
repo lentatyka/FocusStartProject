@@ -42,9 +42,9 @@ class MainViewModel @Inject constructor(
             _rate.value?.let {
                 val d = (value.toDouble() * it.nominal) / it.value
                 String.format("%.4f", d)
-            } ?: "0.0"
+            } ?: value
         }catch (e: NumberFormatException){
-            "0.0"
+            value
         }
     }
 }

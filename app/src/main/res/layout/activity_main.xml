@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="date"
+            type="String" />
+        <variable
+            name="previousDate"
+            type="String" />
+        <variable
+            name="timestamp"
+            type="String" />
+        <variable
+            name="result"
+            type="String" />
+        <variable
+            name="converter"
+            type="com.lentatyka.focusstartproject.domain.model.Rate" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +42,6 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:text="@string/actual_date"
-                android:textAlignment="inherit"
                 tools:text="Date" />
 
             <TextView
@@ -39,7 +52,6 @@
                 android:layout_alignStart="@id/tv_date"
                 android:layout_marginTop="8dp"
                 android:text="@string/previous_date"
-                android:textAlignment="inherit"
                 tools:text="DatePrev" />
 
             <TextView
@@ -50,8 +62,35 @@
                 android:layout_alignStart="@id/tv_date"
                 android:layout_marginTop="8dp"
                 android:text="@string/timestamp_date"
-                android:textAlignment="inherit"
                 tools:text="DateTS" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_date"
+                android:layout_alignParentEnd="true"
+                app:mainValue="@{date}"
+                app:defaultValue="@{@string/default_date}"
+                tools:text="00:00"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_previous_date"
+                android:layout_alignParentEnd="true"
+                app:mainValue="@{previousDate}"
+                app:defaultValue="@{@string/default_date}"
+                tools:text="00:00"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_timestamp"
+                android:layout_alignParentEnd="true"
+                app:mainValue="@{timestamp}"
+                app:defaultValue="@{@string/default_date}"
+                tools:text="00:00"
+                />
 
             <CheckBox
                 android:id="@+id/chb_auto_update"
@@ -83,7 +122,8 @@
         <RelativeLayout
             android:id="@+id/converter_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
             android:padding="4dp"
             app:layout_constraintTop_toBottomOf="@+id/swipeLayout"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -93,26 +133,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                app:mainValue="@{converter.charCode}"
+                app:defaultValue="@{@string/default_rate_char_code}"
                 tools:text="AUD" />
 
             <EditText
                 android:id="@+id/et_value"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_toEndOf="@id/tv_char_code"
                 android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/tv_char_code"
+                android:autofillHints="1"
                 android:inputType="numberDecimal"
-                android:maxLines="1"
                 android:maxLength="10"
-                android:autofillHints="1" />
+                android:maxLines="1" />
 
             <TextView
                 android:id="@+id/tv_nominal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/et_value"
                 android:layout_marginStart="8dp"
-                android:text="@string/nominal"
+                android:layout_toEndOf="@id/et_value"
+                app:mainValue="@{@string/nominal(converter.nominal)}"
+                app:defaultValue="@{@string/nominal(1)}"
                 tools:text="x 100" />
 
             <TextView
@@ -120,6 +163,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                app:mainValue="@{result}"
+                app:defaultValue="@{@string/default_result}"
                 tools:text="100500" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
