@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FocusStartProject</string>
+    <string name="auto_update">Auto update</string>
+    <string name="actual_date">Date: %s</string>
+    <string name="previous_date">Previous date: %s</string>
+    <string name="timestamp_date">Timestamp: %s</string>
+    <string name="nominal">x %d =</string>
 </resources>

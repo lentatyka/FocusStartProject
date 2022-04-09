@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="rate"
+    type="com.lentatyka.focusstartproject.domain.model.Rate" />
     </data>
-
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                tools:text = "Name"/>
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_char_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                tools:text="AUD" />
+
+            <TextView
+                android:id="@+id/tv_nominal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_alignStart="@+id/tv_name"
+                android:layout_marginTop="8dp"
+                tools:text="Nominal" />
+            <TextView
+                android:id="@+id/tv_actual_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nominal"
+                android:layout_alignStart="@+id/tv_name"
+                android:layout_marginTop="8dp"
+                tools:text="Actual: 10.55"/>
+            <TextView
+                android:id="@+id/tv_previous_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nominal"
+                android:layout_alignEnd="@+id/tv_char_code"
+                android:layout_marginTop="8dp"
+                tools:text="Previous: 10.55"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

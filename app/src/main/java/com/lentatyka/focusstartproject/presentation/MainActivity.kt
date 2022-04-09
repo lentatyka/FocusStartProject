@@ -2,6 +2,7 @@ package com.lentatyka.focusstartproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.lentatyka.focusstartproject.R
 
 class MainActivity : AppCompatActivity() {
