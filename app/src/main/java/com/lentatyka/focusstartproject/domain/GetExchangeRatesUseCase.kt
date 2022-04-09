@@ -3,8 +3,9 @@ package com.lentatyka.focusstartproject.domain
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.data.Mapper
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class GetExchangeRatesUseCase(
+class GetExchangeRatesUseCase @Inject constructor(
     private val repository: RateRepository,
     private val mapper: Mapper
 ) {

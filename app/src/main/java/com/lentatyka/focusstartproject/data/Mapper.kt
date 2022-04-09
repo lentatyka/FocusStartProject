@@ -6,8 +6,9 @@ import com.lentatyka.focusstartproject.domain.model.Rate
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class Mapper {
+class Mapper @Inject constructor() {
 
     fun mapExchangeRatesDtoToExchangeRates(excRates: ExchangeRatesDto): ExchangeRates {
         return ExchangeRates(

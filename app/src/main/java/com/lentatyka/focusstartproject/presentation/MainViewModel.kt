@@ -10,8 +10,11 @@ import com.lentatyka.focusstartproject.domain.model.ExchangeRates
 import com.lentatyka.focusstartproject.domain.model.Rate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainViewModel(
+@Singleton
+class MainViewModel @Inject constructor(
     private val getExchangeRatesUseCase: GetExchangeRatesUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<State<ExchangeRates>>()

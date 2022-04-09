@@ -1,117 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity"
-    android:layout_margin="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:id="@+id/date_layout"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.MainActivity"
+        android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/tv_date"
+        <RelativeLayout
+            android:id="@+id/date_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/actual_date"
-            android:textAlignment="inherit"
-            tools:text="Date" />
+            android:padding="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_previous_date"
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/actual_date"
+                android:textAlignment="inherit"
+                tools:text="Date" />
+
+            <TextView
+                android:id="@+id/tv_previous_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_date"
+                android:layout_alignStart="@id/tv_date"
+                android:layout_marginTop="8dp"
+                android:text="@string/previous_date"
+                android:textAlignment="inherit"
+                tools:text="DatePrev" />
+
+            <TextView
+                android:id="@+id/tv_timestamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_previous_date"
+                android:layout_alignStart="@id/tv_date"
+                android:layout_marginTop="8dp"
+                android:text="@string/timestamp_date"
+                android:textAlignment="inherit"
+                tools:text="DateTS" />
+
+            <CheckBox
+                android:id="@+id/chb_auto_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_timestamp"
+                android:layout_alignStart="@id/tv_date"
+                android:button="@null"
+                android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                android:text="@string/auto_update" />
+        </RelativeLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_date"
-            android:layout_alignStart="@id/tv_date"
-            android:layout_marginTop="8dp"
-            android:text="@string/previous_date"
-            android:textAlignment="inherit"
-            tools:text="DatePrev" />
+            app:layout_constrainedHeight="true"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/date_layout"
+            app:layout_constraintBottom_toTopOf="@+id/converter_layout">
 
-        <TextView
-            android:id="@+id/tv_timestamp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/rate_item" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:id="@+id/converter_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_previous_date"
-            android:layout_alignStart="@id/tv_date"
-            android:layout_marginTop="8dp"
-            android:text="@string/timestamp_date"
-            android:textAlignment="inherit"
-            tools:text="DateTS" />
+            android:padding="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/swipeLayout"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <CheckBox
-            android:id="@+id/chb_auto_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_timestamp"
-            android:layout_alignStart="@id/tv_date"
-            android:button="@null"
-            android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
-            android:text="@string/auto_update" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_char_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                tools:text="AUD" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constrainedHeight="true"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/date_layout"
-        app:layout_constraintBottom_toTopOf="@+id/converter_layout">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/rate_item"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <EditText
+                android:id="@+id/et_value"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_toEndOf="@id/tv_char_code"
+                android:layout_marginStart="8dp"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:autofillHints="1" />
 
-    <RelativeLayout
-        android:id="@+id/converter_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/swipeLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:id="@+id/tv_nominal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/et_value"
+                android:layout_marginStart="8dp"
+                android:text="@string/nominal"
+                tools:text="x 100" />
 
-        <TextView
-            android:id="@+id/tv_char_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            tools:text="AUD" />
-        <EditText
-            android:id="@+id/et_value"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_toEndOf="@id/tv_char_code"
-            android:layout_marginStart="8dp"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:maxLength="10"
-            android:autofillHints="1" />
-
-        <TextView
-            android:id="@+id/tv_nominal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/et_value"
-            android:layout_marginStart="8dp"
-            android:text="@string/nominal"
-            tools:text="x 100" />
-
-        <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            tools:text="100500" />
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                tools:text="100500" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
