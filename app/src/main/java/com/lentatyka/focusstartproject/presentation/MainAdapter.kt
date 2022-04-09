@@ -13,8 +13,8 @@ class MainAdapter(private val callback: (Rate) -> Unit) : ListAdapter<Rate, Main
     inner class ViewHolder(private val binding: RateItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Rate){
+            binding.rate = item
             binding.root.setOnClickListener {
-                //pass item to layer for binding
                 callback(item)
             }
         }

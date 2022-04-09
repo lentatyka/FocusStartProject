@@ -5,4 +5,7 @@
     <string name="previous_date">Previous date: %s</string>
     <string name="timestamp_date">Timestamp: %s</string>
     <string name="nominal">x %d =</string>
+    <string name="item_nominal">Nominal: %d</string>
+    <string name="item_actual">Actual: %1$.4f</string>
+    <string name="item_previous">Previous: %1$.4f</string>
 </resources>
