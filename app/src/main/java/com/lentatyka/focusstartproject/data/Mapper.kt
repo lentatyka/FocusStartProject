@@ -9,8 +9,8 @@ import java.util.*
 
 class Mapper {
 
-    fun mapExchangeRatesDtoToExchangeRates(excRates: ExchangeRatesDto) {
-        ExchangeRates(
+    fun mapExchangeRatesDtoToExchangeRates(excRates: ExchangeRatesDto): ExchangeRates {
+        return ExchangeRates(
             date = parseDate(excRates.date),
             previousDate = parseDate(excRates.previousDate),
             timestamp = parseDate(excRates.timestamp),

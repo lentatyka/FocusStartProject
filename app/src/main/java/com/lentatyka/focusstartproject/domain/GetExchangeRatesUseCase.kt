@@ -13,7 +13,7 @@ class GetExchangeRatesUseCase(
         try {
             val result = repository.getExchangeRates()
             emit(
-                mapper.mapExchangeRatesDtoToExchangeRates(result)
+                State.Success(mapper.mapExchangeRatesDtoToExchangeRates(result))
             )
         } catch (e: Exception) {
             emit(State.Error(e.localizedMessage ?: "unknown error"))
