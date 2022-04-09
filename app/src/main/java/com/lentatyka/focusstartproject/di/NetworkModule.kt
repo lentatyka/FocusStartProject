@@ -30,6 +30,11 @@ abstract class NetworkModule {
     companion object{
         @Provides
         @Singleton
+        fun provideJsonType():Type{
+            return ExchangeRatesDto::class.java
+        }
+        @Provides
+        @Singleton
         fun provideGsonConverter(
             type: Type, typeAdapter: JsonDeserializer<@JvmSuppressWildcards ExchangeRatesDto>
         ): GsonConverterFactory {

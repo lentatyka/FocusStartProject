@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lentatyka.focusstartproject.databinding.RateItemBinding
 import com.lentatyka.focusstartproject.domain.model.Rate
 
-class MainAdapter(private val callback: (String) -> Unit) : ListAdapter<Rate, MainAdapter.ViewHolder>(DiffCallback) {
+class MainAdapter(private val callback: (Rate) -> Unit) : ListAdapter<Rate, MainAdapter.ViewHolder>(DiffCallback) {
 
     inner class ViewHolder(private val binding: RateItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Rate){
             binding.root.setOnClickListener {
                 //pass item to layer for binding
-                callback(item.id)
+                callback(item)
             }
         }
     }
