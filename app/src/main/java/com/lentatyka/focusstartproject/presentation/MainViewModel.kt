@@ -27,13 +27,12 @@ class MainViewModel @Inject constructor(
     private val _rate = MutableLiveData<Rate?>()
     val rate: LiveData<Rate?> get() = _rate
 
-    private val _autoUpdate = MutableLiveData<Boolean>()
-    val autoUpdate: LiveData<Boolean> get() = _autoUpdate
+    private val _result = MutableLiveData<Double?>()
+    val result: LiveData<Double?> get() = _result
 
 
     init {
         updateExchangeRates()
-        _autoUpdate.value = getAutoUpdateUseCase()
     }
 
     fun updateExchangeRates() {
@@ -42,32 +41,25 @@ class MainViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun setRate(rate: Rate){
+    fun setRate(rate: Rate) {
         _rate.value = rate
     }
 
-    fun evaluateValue(value: String):String{
-        return if (value.isEmpty())
-            "0"
-        else
-            return try {
-                val d =_rate.value?.let {
-                    (value.toDouble() * it.nominal) / it.value
-                } ?: value.toDouble()
-                String.format("%.4f", d)
-            }catch (e: NumberFormatException){
-                value
-            }
-    }
-
-    override fun onCleared() {
-        _autoUpdate.value?.let {
-            setAutoUpdateUseCase(it)
+    fun evaluateValue(value: String) {
+        _result.value = try {
+            _rate.value?.let {
+                (value.toDouble() * it.nominal) / it.value
+            } ?: value.toDouble()
+        } catch (e: NumberFormatException) {
+            null
         }
-        super.onCleared()
     }
 
     fun setAutoUpdate(checked: Boolean) {
-        _autoUpdate.value = checked
+
     }
+
+    fun getChekedState() = getAutoUpdateUseCase()
+
+    fun saveCheckedState(checked: Boolean) = setAutoUpdateUseCase(checked)
 }

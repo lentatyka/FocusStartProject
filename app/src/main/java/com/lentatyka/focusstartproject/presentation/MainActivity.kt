@@ -2,6 +2,9 @@ package com.lentatyka.focusstartproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -34,26 +37,34 @@ class MainActivity : AppCompatActivity() {
         setViews()
     }
 
-    private fun setViews() {
+    override fun onStart() {
+        super.onStart()
+        binding.chbAutoUpdate.isChecked = viewModel.getChekedState()
+    }
 
-        binding.etValue.setOnKeyListener { _, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_UP
-            ) {
-                binding.result = viewModel.evaluateValue(
-                    binding.etValue.text.toString()
-                )
-                true
-            } else
-                false
-        }
+    override fun onStop() {
+        super.onStop()
+        viewModel.saveCheckedState(binding.chbAutoUpdate.isChecked)
+    }
+
+    private fun setViews() {
+        binding.etValue.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(chars: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.evaluateValue(chars!!.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
         binding.chbAutoUpdate.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setAutoUpdate(isChecked)
         }
-        //verify checkbox preferences (on/off). Add chkboxLiveDate
     }
 
     private fun setViewModel() {
         viewModel = ViewModelProvider(this, vmFactory)[MainViewModel::class.java]
+        //
         viewModel.state.observe(this) { state ->
             when (state) {
                 is State.Loading -> {
@@ -64,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, state.message, Toast.LENGTH_LONG).show()
                 }
                 is State.Success -> {
-                    with(binding){
+                    with(binding) {
                         swipeLayout.isRefreshing = false
                         //pass date to main layout
                         state.data.also {
@@ -72,14 +83,25 @@ class MainActivity : AppCompatActivity() {
                             previousDate = it.previousDate
                             timestamp = it.timestamp
                         }
+                        //update result
+                        viewModel.evaluateValue(etValue.text.toString())
                     }
 
                     mainAdapter.submitList(state.data.rate)
                 }
             }
         }
-        viewModel.rate.observe(this){
-            binding.converter = it
+        //
+        viewModel.rate.observe(this) {
+            with(binding) {
+                converter = it
+                //update result
+                viewModel.evaluateValue(etValue.text.toString())
+            }
+        }
+        //
+        viewModel.result.observe(this) {
+            binding.result = it
         }
     }
 
