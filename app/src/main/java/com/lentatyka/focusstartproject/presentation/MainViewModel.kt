@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.*
 import javax.inject.Inject
-import javax.inject.Singleton
+
 private const val PERIOD_UPDATE = 60000L
-@Singleton
+
 class MainViewModel @Inject constructor(
     private val getExchangeRatesUseCase: ExchangeRatesUseCase,
     getAutoUpdateUseCase: LoadAutoUpdateStatusUseCase,
@@ -32,13 +32,17 @@ class MainViewModel @Inject constructor(
     val result: LiveData<Double?> get() = _result
 
     private var _isChecked = getAutoUpdateUseCase()
-    val isChecked:Boolean get() = _isChecked
+    val isChecked: Boolean get() = _isChecked
 
-    private  var timer: Timer? = null
+    private var timer: Timer? = null
 
 
     init {
+        if (_isChecked)
+            startAutoUpdate()
+        else
             updateExchangeRates()
+
     }
 
     fun updateExchangeRates() {
@@ -62,14 +66,15 @@ class MainViewModel @Inject constructor(
     }
 
     fun setAutoUpdate(checked: Boolean) {
-        if(checked)
+        _isChecked = checked
+        if (checked)
             startAutoUpdate()
         else
             stopAutoUpdate()
     }
 
 
-    private fun startAutoUpdate(){
+    private fun startAutoUpdate() {
         timer = Timer()
         timer?.schedule(
             object : TimerTask() {
@@ -82,7 +87,7 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    private fun stopAutoUpdate(){
+    private fun stopAutoUpdate() {
         timer?.let {
             it.cancel()
             timer = null
