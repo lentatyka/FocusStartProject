@@ -8,19 +8,19 @@ import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.domain.network.ExchangeRatesUseCase
 import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
 import com.lentatyka.focusstartproject.domain.network.model.Rate
-import com.lentatyka.focusstartproject.domain.preferences.GetAutoUpdateUseCase
-import com.lentatyka.focusstartproject.domain.preferences.SetAutoUpdateUseCase
+import com.lentatyka.focusstartproject.domain.preferences.LoadAutoUpdateStatusUseCase
+import com.lentatyka.focusstartproject.domain.preferences.SaveAutoUpdateStatusUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-private const val PERIOD_UPDATE = 6000L
+private const val PERIOD_UPDATE = 60000L
 @Singleton
 class MainViewModel @Inject constructor(
     private val getExchangeRatesUseCase: ExchangeRatesUseCase,
-    private val getAutoUpdateUseCase: GetAutoUpdateUseCase,
-    private val setAutoUpdateUseCase: SetAutoUpdateUseCase
+    getAutoUpdateUseCase: LoadAutoUpdateStatusUseCase,
+    private val setAutoUpdateUseCase: SaveAutoUpdateStatusUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<State<ExchangeRates>>()
     val state: LiveData<State<ExchangeRates>> get() = _state
@@ -31,11 +31,14 @@ class MainViewModel @Inject constructor(
     private val _result = MutableLiveData<Double?>()
     val result: LiveData<Double?> get() = _result
 
+    private var _isChecked = getAutoUpdateUseCase()
+    val isChecked:Boolean get() = _isChecked
+
     private  var timer: Timer? = null
 
 
     init {
-        updateExchangeRates()
+            updateExchangeRates()
     }
 
     fun updateExchangeRates() {
@@ -59,20 +62,19 @@ class MainViewModel @Inject constructor(
     }
 
     fun setAutoUpdate(checked: Boolean) {
-
+        if(checked)
+            startAutoUpdate()
+        else
+            stopAutoUpdate()
     }
 
-    fun getChekedState() = getAutoUpdateUseCase()
 
-    fun saveCheckedState(checked: Boolean) = setAutoUpdateUseCase(checked)
-
-    fun startAutoUpdate(){
-        stopAutoUpdate()
+    private fun startAutoUpdate(){
         timer = Timer()
         timer?.schedule(
             object : TimerTask() {
                 override fun run() {
-                    getExchangeRatesUseCase()
+                    updateExchangeRates()
                 }
             },
             1000,
@@ -80,10 +82,16 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun stopAutoUpdate(){
+    private fun stopAutoUpdate(){
         timer?.let {
             it.cancel()
             timer = null
         }
+    }
+
+    override fun onCleared() {
+        stopAutoUpdate()
+        setAutoUpdateUseCase(_isChecked)
+        super.onCleared()
     }
 }

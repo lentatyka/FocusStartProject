@@ -1,12 +1,10 @@
 package com.lentatyka.focusstartproject.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +12,6 @@ import com.lentatyka.focusstartproject.FocusStartApplication
 import com.lentatyka.focusstartproject.R
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.databinding.ActivityMainBinding
-import com.lentatyka.focusstartproject.di.DaggerAppComponent
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

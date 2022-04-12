@@ -1,6 +1,5 @@
 package com.lentatyka.focusstartproject.di
 
-import android.app.Application
 import android.content.Context
 import com.lentatyka.focusstartproject.presentation.MainActivity
 import dagger.BindsInstance

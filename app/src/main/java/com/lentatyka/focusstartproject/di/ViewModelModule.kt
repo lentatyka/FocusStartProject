@@ -1,6 +1,5 @@
 package com.lentatyka.focusstartproject.di
 
-import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lentatyka.focusstartproject.presentation.MainViewModel
