@@ -141,9 +141,10 @@
             <EditText
                 android:id="@+id/et_value"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:autofillHints="1"
+                android:backgroundTint="@color/pig_three"
                 android:inputType="numberDecimal"
                 android:maxLength="10"
                 android:maxLines="1" />
@@ -152,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/et_value"
+                android:layout_alignBaseline="@id/et_value"
                 android:layout_marginStart="8dp"
                 android:text="@string/default_rate_char_code"
                 tools:text="RUB" />
@@ -161,6 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/tv_char_code"
+                android:layout_alignBottom="@id/tv_char_code"
                 android:layout_marginEnd="8dp"
                 app:resultValue="@{result}"
                 tools:text="100500" />
@@ -170,6 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignBaseline="@id/et_value"
                 android:textStyle="bold"
                 app:mainValue="@{converter.charCode}"
                 app:defaultValue="@{@string/default_rate_char_code}"

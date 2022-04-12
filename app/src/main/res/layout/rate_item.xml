@@ -24,7 +24,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:textStyle="italic"
-                style="@style/CustomTextView"
+                style="@style/CustomTheme"
                 android:text="@{rate.name}"
                 tools:text="Name" />
 
@@ -35,7 +35,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:textStyle="bold"
-                style="@style/CustomTextView"
+                style="@style/CustomTheme"
                 android:text="@{rate.charCode}"
                 tools:text="AUD" />
 
@@ -46,7 +46,7 @@
                 android:layout_below="@id/tv_name"
                 android:layout_alignStart="@+id/tv_name"
                 android:layout_marginTop="8dp"
-                style="@style/CustomTextView"
+                style="@style/CustomTheme"
                 android:text="@{@string/item_nominal(rate.nominal)}"
                 tools:text="Nominal" />
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_below="@id/tv_nominal"
                 android:layout_alignStart="@+id/tv_name"
                 android:layout_marginTop="8dp"
-                style="@style/CustomTextView"
+                style="@style/CustomTheme"
                 android:text="@{@string/item_actual(rate.value)}"
                 tools:text="Actual: 10.55"/>
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_below="@id/tv_nominal"
                 android:layout_alignEnd="@+id/tv_char_code"
                 android:layout_marginTop="8dp"
-                style="@style/CustomTextView"
+                style="@style/CustomTheme"
                 android:text="@{@string/item_previous(rate.previous)}"
                 tools:text="Previous: 10.55"/>
         </RelativeLayout>
