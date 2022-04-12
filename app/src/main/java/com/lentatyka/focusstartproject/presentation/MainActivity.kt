@@ -37,28 +37,22 @@ class MainActivity : AppCompatActivity() {
         setViews()
     }
 
-    override fun onStart() {
-        super.onStart()
-        binding.chbAutoUpdate.isChecked = viewModel.getChekedState()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.saveCheckedState(binding.chbAutoUpdate.isChecked)
-    }
-
     private fun setViews() {
-        binding.etValue.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(chars: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.evaluateValue(chars!!.toString())
+        with(binding){
+            etValue.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(chars: CharSequence, p1: Int, p2: Int, p3: Int) {
+                    viewModel.evaluateValue(chars.toString())
+                }
+
+                override fun afterTextChanged(p0: Editable?) {}
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            })
+            with(chbAutoUpdate){
+                isChecked = viewModel.isChecked
+                setOnClickListener {
+                    viewModel.setAutoUpdate(this.isChecked)
+                }
             }
-
-            override fun afterTextChanged(p0: Editable?) {}
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
-        binding.chbAutoUpdate.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setAutoUpdate(isChecked)
         }
     }
 
