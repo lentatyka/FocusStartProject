@@ -1,5 +1,6 @@
 package com.lentatyka.focusstartproject.domain.network
 
+import android.util.Log
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.data.network.Mapper
 import kotlinx.coroutines.flow.flow
@@ -11,6 +12,7 @@ class ExchangeRatesUseCase @Inject constructor(
 ) {
     operator fun invoke() = flow {
         emit(State.Loading)
+        Log.d("TAG", "START")
         try {
             val result = repository.getExchangeRates()
             emit(

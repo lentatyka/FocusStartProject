@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".FocusStartApplication"
-        android:theme="@style/Theme.FocusStartProject">
+        android:theme="@style/CustomTextView">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
