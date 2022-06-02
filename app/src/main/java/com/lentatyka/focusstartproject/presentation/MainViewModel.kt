@@ -10,15 +10,17 @@ import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
 import com.lentatyka.focusstartproject.domain.network.model.Rate
 import com.lentatyka.focusstartproject.domain.preferences.LoadAutoUpdateStatusUseCase
 import com.lentatyka.focusstartproject.domain.preferences.SaveAutoUpdateStatusUseCase
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
 private const val PERIOD_UPDATE = 60000L
 
 class MainViewModel @Inject constructor(
-    private val getExchangeRatesUseCase: ExchangeRatesUseCase,
+    private val exchangeRatesUseCase: ExchangeRatesUseCase,
     getAutoUpdateUseCase: LoadAutoUpdateStatusUseCase,
     private val setAutoUpdateUseCase: SaveAutoUpdateStatusUseCase
 ) : ViewModel() {
@@ -46,9 +48,11 @@ class MainViewModel @Inject constructor(
     }
 
     fun updateExchangeRates() {
-        getExchangeRatesUseCase().onEach {
-            _state.postValue(it)
-        }.launchIn(viewModelScope)
+        viewModelScope.launch {
+            exchangeRatesUseCase().onEach {
+                _state.postValue(it)
+            }.collect()
+        }
     }
 
     fun setRate(rate: Rate) {

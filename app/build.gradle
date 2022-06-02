@@ -66,6 +66,8 @@ dependencies {
 
     //Coroutines
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
+    //Flow
+    testImplementation 'app.cash.turbine:turbine:0.6.0'
 
     //Mock
     testImplementation "org.mockito:mockito-core:4.0.0"
