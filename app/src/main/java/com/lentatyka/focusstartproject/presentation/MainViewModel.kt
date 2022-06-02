@@ -8,10 +8,8 @@ import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.domain.network.ExchangeRatesUseCase
 import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
 import com.lentatyka.focusstartproject.domain.network.model.Rate
-import com.lentatyka.focusstartproject.domain.preferences.LoadAutoUpdateStatusUseCase
-import com.lentatyka.focusstartproject.domain.preferences.SaveAutoUpdateStatusUseCase
+import com.lentatyka.focusstartproject.domain.preferences.PreferencesUseCase
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.*
@@ -21,8 +19,7 @@ private const val PERIOD_UPDATE = 60000L
 
 class MainViewModel @Inject constructor(
     private val exchangeRatesUseCase: ExchangeRatesUseCase,
-    getAutoUpdateUseCase: LoadAutoUpdateStatusUseCase,
-    private val setAutoUpdateUseCase: SaveAutoUpdateStatusUseCase
+    private val preferencesUseCase: PreferencesUseCase
 ) : ViewModel() {
     private val _state = MutableLiveData<State<ExchangeRates>>()
     val state: LiveData<State<ExchangeRates>> get() = _state
@@ -33,7 +30,7 @@ class MainViewModel @Inject constructor(
     private val _result = MutableLiveData<Double?>()
     val result: LiveData<Double?> get() = _result
 
-    private var _isChecked = getAutoUpdateUseCase()
+    private var _isChecked = preferencesUseCase.getAutoUpdateAccess()
     val isChecked: Boolean get() = _isChecked
 
     private var timer: Timer? = null
@@ -100,7 +97,7 @@ class MainViewModel @Inject constructor(
 
     override fun onCleared() {
         stopAutoUpdate()
-        setAutoUpdateUseCase(_isChecked)
+        preferencesUseCase.saveAutoUpdateAccess(_isChecked)
         super.onCleared()
     }
 }
