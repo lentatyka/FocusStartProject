@@ -51,12 +51,6 @@ class MainViewModel @Inject constructor(
                 _state.emit(it)
             }
         }
-
-//        viewModelScope.launch {
-//            exchangeRatesUseCase().onEach {
-//                _state.postValue(it)
-//            }.collect()
-//        }
     }
 
     fun setRate(rate: Rate) {

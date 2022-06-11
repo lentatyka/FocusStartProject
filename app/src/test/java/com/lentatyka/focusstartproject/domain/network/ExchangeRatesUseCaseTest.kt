@@ -42,7 +42,7 @@ class ExchangeRatesUseCaseTest {
                 Rate("ID", "USD", 1, "Dollar", 10.99, 30.99)
             )
         )
-        `when`(fakeRepository.getExchangeRates()).thenReturn(exchangeRateDto)
+        `when`(fakeRepository.invoke()).thenReturn(exchangeRateDto)
         val flow = useCase.invoke()
         flow.test {
             assertThat(awaitItem()).isEqualTo(State.Loading)
@@ -56,7 +56,7 @@ class ExchangeRatesUseCaseTest {
 
     @Test
     fun `flow emit error State`() = runTest {
-        `when`(fakeRepository.getExchangeRates()).thenThrow(HttpException::class.java)
+        `when`(fakeRepository.invoke()).thenThrow(HttpException::class.java)
         val flow = useCase.invoke()
         flow.test {
             assertThat(awaitItem()).isEqualTo(State.Loading)

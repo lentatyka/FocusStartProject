@@ -96,7 +96,7 @@ class MainViewModelTest{
         )
         val expected = ExchangeRates(
             "Bad date", "Bad date", "Bad date", emptyList())
-        `when`(fakeRepository.getExchangeRates()).thenReturn(exchangeRatesDto)
+        `when`(fakeRepository.invoke()).thenReturn(exchangeRatesDto)
 
         viewModel.updateExchangeRates()
         viewModel.state.test {
@@ -112,7 +112,7 @@ class MainViewModelTest{
     @Test
     fun `emit state return error value`() =runTest{
 
-        `when`(fakeRepository.getExchangeRates()).thenThrow(HttpException::class.java)
+        `when`(fakeRepository.invoke()).thenThrow(HttpException::class.java)
 
         viewModel.updateExchangeRates()
         viewModel.state.test {

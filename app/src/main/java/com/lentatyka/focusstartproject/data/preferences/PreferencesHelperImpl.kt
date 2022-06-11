@@ -1,11 +1,11 @@
 package com.lentatyka.focusstartproject.data.preferences
 
 import android.content.Context
+import com.lentatyka.focusstartproject.common.Constants.AUTOUPDATE
+import com.lentatyka.focusstartproject.common.Constants.PREFERENCES
 import com.lentatyka.focusstartproject.domain.preferences.PreferencesHelper
 import javax.inject.Inject
 
-private const val AUTOUPDATE = "AUTOUPDATE"
-private const val PREFERENCES = "PREFERENCES"
 class PreferencesHelperImpl @Inject constructor(private val context: Context): PreferencesHelper {
     override fun getAutoUpdateAccess(): Boolean {
         return context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)?.getBoolean(

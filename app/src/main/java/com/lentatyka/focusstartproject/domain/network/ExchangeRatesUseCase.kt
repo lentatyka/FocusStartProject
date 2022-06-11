@@ -1,6 +1,5 @@
 package com.lentatyka.focusstartproject.domain.network
 
-import android.util.Log
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.data.network.Mapper
 import com.lentatyka.focusstartproject.domain.network.model.ExchangeRates
@@ -16,7 +15,7 @@ class ExchangeRatesUseCase @Inject constructor(
         return flow {
             try {
                 emit(State.Loading)
-                val result = repository.getExchangeRates()
+                val result = repository()
                 emit(
                     State.Success(mapper.mapExchangeRatesDtoToExchangeRates(result))
                 )

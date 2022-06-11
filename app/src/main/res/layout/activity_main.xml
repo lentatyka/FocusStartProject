@@ -77,15 +77,16 @@
                 />
 
             <TextView
+                android:id="@+id/tv_date_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_date"
                 android:layout_alignParentEnd="true"
-                app:mainValue="@{date}"
                 app:defaultValue="@{@string/default_date}"
-                tools:text="00:00"
-                />
+                app:mainValue="@{date}"
+                tools:text="00:00" />
             <TextView
+                android:id="@+id/tv_previous_date_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_previous_date"
@@ -95,6 +96,7 @@
                 tools:text="00:00"
                 />
             <TextView
+                android:id="@+id/tv_timestamp_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_timestamp"

@@ -32,7 +32,7 @@ class Mapper @Inject constructor() {
         return try {
             val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault())
             val formatter = SimpleDateFormat("EEE, MMM dd, h:mm a", Locale.getDefault())
-            formatter.format(parser.parse(date))
+            formatter.format(parser.parse(date)!!)
         } catch (e: ParseException) {
             "Bad date"
         }

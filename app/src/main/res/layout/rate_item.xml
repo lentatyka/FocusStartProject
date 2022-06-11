@@ -19,34 +19,34 @@
 
             <TextView
                 android:id="@+id/tv_name"
+                style="@style/CustomTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:textStyle="italic"
-                style="@style/CustomTheme"
                 android:text="@{rate.name}"
+                android:textStyle="italic"
                 tools:text="Name" />
 
             <TextView
-                android:id="@+id/tv_char_code"
+                android:id="@+id/tv_item_char_code"
+                style="@style/CustomTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:textStyle="bold"
-                style="@style/CustomTheme"
                 android:text="@{rate.charCode}"
+                android:textStyle="bold"
                 tools:text="AUD" />
 
             <TextView
                 android:id="@+id/tv_nominal"
+                style="@style/CustomTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_name"
                 android:layout_alignStart="@+id/tv_name"
                 android:layout_marginTop="8dp"
-                style="@style/CustomTheme"
                 android:text="@{@string/item_nominal(rate.nominal)}"
                 tools:text="Nominal" />
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_nominal"
-                android:layout_alignEnd="@+id/tv_char_code"
+                android:layout_alignEnd="@+id/tv_item_char_code"
                 android:layout_marginTop="8dp"
                 style="@style/CustomTheme"
                 android:text="@{@string/item_previous(rate.previous)}"

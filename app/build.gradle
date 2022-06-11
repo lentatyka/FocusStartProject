@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.lentatyka.focusstartproject.CustomTestRunner"
     }
 
     buildTypes {
@@ -80,6 +80,20 @@ dependencies {
     //
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.4.0'){
+        exclude group: 'org.checkerframework', module: 'checker'
+    }
     androidTestImplementation 'com.google.truth:truth:1.1.3'
+
+    //Mock
+    androidTestImplementation "org.mockito:mockito-core:4.0.0"
+    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    androidTestImplementation "io.mockk:mockk:1.12.4"
+
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
+
+
+    kaptTest "com.google.dagger:dagger-compiler:2.40"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:2.40"
 
 }

@@ -6,5 +6,5 @@ import javax.inject.Inject
 class RateRepositoryImpl @Inject constructor(
     private val exchangeRatesApi: ExchangeRatesApi
 ) : RateRepository {
-    override suspend fun getExchangeRates() = exchangeRatesApi.getExchangeRates()
+    override suspend fun invoke() = exchangeRatesApi.getExchangeRates()
 }
