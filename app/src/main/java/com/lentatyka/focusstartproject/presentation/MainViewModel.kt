@@ -42,7 +42,6 @@ class MainViewModel @Inject constructor(
             startAutoUpdate()
         else
             updateExchangeRates()
-
     }
 
     fun updateExchangeRates() {

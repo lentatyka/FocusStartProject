@@ -4,31 +4,33 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lentatyka.focusstartproject.FocusStartApplication
 import com.lentatyka.focusstartproject.R
 import com.lentatyka.focusstartproject.common.State
 import com.lentatyka.focusstartproject.databinding.ActivityMainBinding
+import com.lentatyka.focusstartproject.di.AppComponent
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var vmFactory: MainViewModelFactory
-    private lateinit var viewModel: MainViewModel
+    private lateinit var appComponent: AppComponent
 
-    lateinit var mainAdapter: MainAdapter
+     private val viewModel: MainViewModel by viewModels{
+         appComponent.viewModelsFactory()
+     }
+
+    private lateinit var mainAdapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as FocusStartApplication).appComponent.inject(this)
+        appComponent = (application as FocusStartApplication).appComponent
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
@@ -57,8 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViewModel() {
-        viewModel = ViewModelProvider(this, vmFactory)[MainViewModel::class.java]
-        //
+
         lifecycleScope.launchWhenStarted {
             viewModel.state.onEach { state ->
                 when (state) {
